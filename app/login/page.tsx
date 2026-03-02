@@ -35,7 +35,10 @@ export default function LoginPage() {
     try {
       const result = await login(email, password);
       if (result.success) {
-        router.push('/');
+        // 使用 setTimeout 避免在渲染时更新状态
+        setTimeout(() => {
+          router.push('/');
+        }, 0);
       } else {
         setError(result.message);
       }
