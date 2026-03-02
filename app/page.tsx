@@ -1,17 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, Zap, Brain, MessageSquare, Copy, RefreshCw, Check } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useUser } from '@/contexts/UserContext';
 
 export default function Home() {
+  const { user, isAuthenticated, useOneGeneration } = useUser();
   const [inputText, setInputText] = useState('');
   const [selectedVariant, setSelectedVariant] = useState<'emotional' | 'practical' | 'controversial'>('emotional');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedText, setGeneratedText] = useState('');
   const [copied, setCopied] = useState(false);
-  const [freeUsesLeft, setFreeUsesLeft] = useState(3);
+  
+  // 使用用户的剩余次数，未登录默认为3
+  const freeUsesLeft = isAuthenticated && user ? user.remainingUses : 3;
 
   const variants = [
     {
