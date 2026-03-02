@@ -53,14 +53,9 @@ const VariantSelector: React.FC<VariantSelectorProps> = ({ selectedVariant, onSe
               variant.bgColor,
               variant.borderColor,
               selectedVariant === variant.id
-                ? 'ring-2 ring-offset-2 ring-opacity-50 transform scale-[1.02]'
+                ? `ring-2 ring-offset-2 ring-${variant.color.split(' ')[0].replace('from-', '')}-500 transform scale-[1.02]`
                 : 'hover:scale-[1.01] hover:shadow-sm'
             )}
-            style={{
-              ringColor: selectedVariant === variant.id 
-                ? variant.color.split(' ')[0].replace('from-', '') 
-                : 'transparent'
-            }}
           >
             <div className="flex items-start gap-3">
               <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${variant.color} flex items-center justify-center text-white text-2xl`}>
