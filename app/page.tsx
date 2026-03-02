@@ -72,7 +72,10 @@ export default function Home() {
 
       if (data.success) {
         setGeneratedText(data.text);
-        setFreeUsesLeft(prev => prev - 1);
+        // 如果已登录，使用用户系统的次数
+        if (isAuthenticated && user) {
+          useOneGeneration();
+        }
       } else {
         alert(data.error || '生成失败，请重试');
       }
